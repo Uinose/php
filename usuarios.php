@@ -1,3 +1,6 @@
+<?php 
+    include "./php/conexion.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,27 +61,38 @@
             </button>
           </div>
         </div>
+       
         <div class="card-body">
-        <form action="" class="row">
+        <?php
+        if(isset($_GET['error'])){
+        ?>
+            <div class="alert alert-danger">
+            <b>Error:</b> <?php echo $_GET['error']; ?>
+            </div>
+        <?php
+        }
+        ?>
+        
+        <form action="./php/insertarUsuario.php" class="row" method="POST">
             <div class="col-4">
                 <label for="Nombre"></label>
-                <input type="text" class="form-control" placeholder="Inserta tu nombre">
+                <input type="text" class="form-control" placeholder="Inserta tu nombre" name="nombre" id="txtnombre" required>
             </div>
             <div class="col-4">
                 <label for="Apellido"></label>
-                <input type="text" class="form-control" placeholder="Inserta tu Apellido">
+                <input type="text" class="form-control" placeholder="Inserta tu Apellido" name="ap" required>
             </div>
             <div class="col-4">
                 <label for="Email"></label>
-                <input type="text" class="form-control" placeholder="Inserta tu Email">
+                <input type="text" class="form-control" placeholder="Inserta tu Email" name="email" required>
             </div>
             <div class="col-4">
                 <label for="Password"></label>
-                <input type="password" class="form-control" placeholder="Inserta tu Password">
+                <input type="password" class="form-control" placeholder="Inserta tu Password" name="pass1" required>
             </div>
             <div class="col-4">
                 <label for="Confirma tu Password"></label>
-                <input type="password" class="form-control" placeholder="Confirma tu Password">
+                <input type="password" class="form-control" placeholder="Confirma tu Password" name="pass2" required>
             </div>
             <div class="col-4">
                 <br>
