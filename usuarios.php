@@ -126,8 +126,6 @@
             <tbody>
                 <?php
                   while($fila = mysqli_fetch_array($resultado)){
-
-                  
                 ?>
                 <tr>
                     <td><?php echo $fila['id'];?></td>
@@ -140,7 +138,7 @@
                         data-nombre="<?php echo $fila['nombre'];?>"
                         data-ap="<?php echo $fila['apellidos'];?>"
                         data-email="<?php echo $fila['email'];?>"
-                        data-toggle="model" data-target="modal-editar">
+                        data-toggle="model" data-target="#modal-editar">
                          <i class="fa fa-edit"></i>></button>
                         <button class="btn btn-sm btn-danger btnEliminar"
                         data-id="<?php echo $fila['id'] ?>"
