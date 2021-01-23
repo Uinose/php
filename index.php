@@ -1,3 +1,10 @@
+<?php
+session_start();
+$userData=$_SESSION['userData'];
+if(isset($_SESSION['userData'])){header("Location: ./login.php");}
+print_r($userData);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
