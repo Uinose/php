@@ -72,6 +72,13 @@
             </div>
         <?php
         }
+        if(isset($_GET['success'])){
+        ?>
+            <div class="alert alert-success">
+            <b>Listo!</b> <?php echo $_GET['success']; ?>
+            </div>
+        <?php
+        }
         ?>
         
         <form action="./php/insertarUsuario.php" class="row" method="POST">
@@ -128,7 +135,12 @@
                     <td><?php echo $fila['email']?></td>
                     <td>**********</td>
                     <td>
-                        <button class="btn btn-sm btn-warning">
+                        <button class="btn btn-sm btn-warning btnEdit"
+                        data-id="<?php echo $fila['id'];?>"
+                        data-nombre="<?php echo $fila['nombre'];?>"
+                        data-ap="<?php echo $fila['apellidos'];?>"
+                        data-email="<?php echo $fila['email'];?>"
+                        data-toggle="model" data-target="modal-editar">
                          <i class="fa fa-edit"></i>></button>
                         <button class="btn btn-sm btn-danger btnEliminar"
                         data-id="<?php echo $fila['id'] ?>"
@@ -144,7 +156,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
+  <!-- Modal eliminar-->
   <?php include "./layouts/footer.php" ?>
   <div class="modal fade" id="modal-eliminar">
         <div class="modal-dialog">
@@ -171,7 +183,52 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
- 
+   <!-- Modal editar-->
+   <?php include "./layouts/footer.php" ?>
+  <div class="modal fade" id="modal-editar">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Editar Usuario</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+         <form action="./php/editarUsuario.php" method="POST">
+                    <div class="modal-body">
+                    <div class="col-12">
+                        <label for="Nombre"></label>
+                        <input type="text" class="form-control" placeholder="Inserta tu nombre" name="nombre" id="nombreEdit" required>
+                    </div>
+                    <div class="col-12">
+                        <label for="Apellido"></label>
+                        <input type="text" class="form-control" placeholder="Inserta tu Apellido" name="ap" required id="apEdit">
+                    </div>
+                    <div class="col-12">
+                        <label for="Email"></label>
+                        <input type="text" class="form-control" placeholder="Inserta tu Email" name="email" required id="emailEdit">
+                    </div>
+                    <div class="col-12">
+                        <label for="Password"></label>
+                        <input type="password" class="form-control" placeholder="Inserta tu Password" name="pass1">
+                    </div>
+                    <div class="col-12">
+                        <label for="Confirma tu Password"></label>
+                        <input type="password" class="form-control" placeholder="Confirma tu Password" name="pass2">
+                    </div>
+              <input type="hidden" id="idEditar" name="id">
+            </div>
+              <div class="modal-footer justify-content-between">
+                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                 <button type="submit" class="btn btn-outline-primary">Guardar</button>
+              </div>
+          </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 </div>
 <!-- ./wrapper -->
 
@@ -189,6 +246,16 @@
    $(".btnEliminar").click(function){
      idEliminar=$(this).data('id');
      $("#idEliminar").val(idEliminar);
+   });
+   $(".btnEdit").click(function(){
+      var idEdit=$(this).data('id');
+      var nombre=$(this).data('nombre');
+      var ap=$(this).data('ap');
+      var email=$(this).data('email');
+      $("nombreEdit").val(nombreEdit);
+      $("apEdit").val(apEdit);
+      $("emailEdit").val(emailEdit);
+      $("idEdit").val(idEdit);
    });
   });
 </script>
